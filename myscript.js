@@ -1,97 +1,65 @@
-function getComputerChoice(computerChoice) {
-    computerChoice = Math.floor(Math.random()*3)+1;
-    return computerChoice
+    userInput = "";
+   
+    const scissors = document.querySelector(".scissors");
+    const paper = document.querySelector(".paper");
+    const rock = document.querySelector(".rock");
+
+    scissors.addEventListener("click", () => {userInput  = "scissors"; startgame();});
+    paper.addEventListener("click", () => {userInput = "paper"; startgame();});
+    rock.addEventListener("click", () => {userInput = "rock"; startgame();});
+
+    function getHumanChoice() {
+        return userInput;
+    }
+
+    function getComputerChoice(computerChoice) {
+        computerChoice = Math.floor(Math.random()*3)+1;
+
+    switch(computerChoice) {
+        case 1: return "rock";
+        case 2: return "paper";
+        case 3: return "scissors";
+    }
 }
+    let infoQuery = document.querySelector(".infoText");
 
-function getHumanChoice() {
-    let userInput = prompt("Rock Paper and Scissors, choose your weapon! it will be 5 rounds");
-    let humanChoice; 
-    if (userInput === "rock") {
-        humanChoice = 1;
-    } else if (userInput === "paper") {
-        humanChoice = 2;
-    } else if (userInput === "scissors") {
-        humanChoice  = 3;
-    } else {
-        alert("That is not a proper weapon");
+    let humanScore = 0, computerScore = 0; 
+
+    function startgame() {
+        while (computerScore < 5 && humanScore < 5) {
+            let userInput = getHumanChoice();
+            let computerChoice = getComputerChoice();
+            playRound(userInput, computerChoice);
+         
+             if (humanScore === 5) {
+                infoQuery.textContent = "HUMANITY WINS!!!";
+            } else if (computerScore === 5) {
+                infoQuery.textContent = "COMPUTER WINS!!!";
+            } else {
+                return;
+            }
+        }
     }
 
-    return humanChoice;
-}
+    function playRound(userInput, computerChoice) {
+    let humanQuery = document.querySelector(".scoreHuman");
+    let computerQuery = document.querySelector(".scoreComputer");
 
-    let humanScore = 0,
-    computerScore = 0; 
-
-    while (computerScore < 5 && humanScore < 5) {
-        let humanChoice = getHumanChoice();
-        let computerChoice = getComputerChoice();
-        playRound(humanChoice, computerChoice);
+    if (userInput === computerChoice){
+    infoQuery.textContent = "draw"
+    } else if (userInput === "rock" && computerChoice === "scissors" ||
+              userInput === "paper" && computerChoice === "rock"     ||
+              userInput === "scissors" && computerChoice === "paper") {
+                 infoQuery.textContent = "You win!";
+                 humanScore++;
+                 humanQuery.textContent = `${humanScore}`;
+    } else if (userInput === "scissors" && computerChoice === "rock" ||
+               userInput === "rock" && computerChoice === "paper"    ||
+               userInput === "paper" && computerChoice === "scissors") {
+                 infoQuery.textContent = "You lose!";
+                 computerScore++;
+                 computerQuery.textContent = `${computerScore}`;
     }
-
-    function playRound(humanChoice, computerChoice) {
-    switch (humanChoice) {
-    case 1: 
-    if (computerChoice === 1) {
-        console.log("Computer chose rock, and you chose rock, its a draw!");
-        console.log(computerScore, humanScore);
-    } else if (computerChoice === 2) {
-        console.log("Computer chose paper, and you chose rock, you loose!");
-
-        computerScore++;
-        console.log(computerScore, humanScore);
-    } else if (computerChoice === 3) {
-        console.log("Computer chose scissors, and you chose rock, you win!");
-
-        humanScore++;
-        console.log(computerScore, humanScore);
-    }
-    break;
-
-    case 2: 
-    if (computerChoice === 1) {
-        console.log("Computer chose rock, and you chose paper, you win!");
-
-        humanScore++;
-        console.log(computerScore, humanScore);
-    } else if (computerChoice === 2) {
-        console.log("Computer chose paper, and you chose paper, its a draw!");
-        console.log(computerScore, humanScore);
-    } else if (computerChoice === 3) {
-        console.log("Computer chose scissors, and you chose paper, you loose!");
-
-        computerScore++;
-        console.log(computerScore, humanScore);
-    }
-    break;
-
-    case 3: 
-    if (computerChoice === 1) {
-        console.log("Computer chose rock, and you chose scissors, you loose!");
-
-        computerScore++;
-        console.log(computerScore, humanScore);
-    } else if (computerChoice === 2) {
-        console.log("Computer chose paper, and you chose scissors, you win!");
-
-        humanScore++;
-        console.log(computerScore, humanScore);
-    } else if (computerChoice === 3) {
-        console.log("Computer chose scissors, and you chose scissors, its a draw!");
-        console.log(computerScore, humanScore);
-    }
-    break;
-    
-    }
-    return { humanScore, computerScore };
-}
-
-if (humanScore === 5) {
-
-    console.log('HUMANITY WINS!!!');
-
-} else if (computerScore === 5) {
-
-    console.log('COMPUTER WINS');
-
+    return {computerScore, humanScore};
 }
 

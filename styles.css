@@ -1,0 +1,64 @@
+/* * {
+    outline: solid red;
+} */
+body {
+    background-color: rgb(255, 254, 254);
+}
+.parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+    flex-direction: column;
+}
+
+.secondContainer {
+    text-align: center;
+    gap: 150px;
+    display: inline-flex;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: 500;
+    font-size: 3rem;
+
+}
+.firstContainer {
+    display: flex;
+    gap: 100px;
+    margin-bottom: 100px;
+}
+
+img {
+    height: 400px;
+    width: 400px;
+}
+
+img:hover {
+    transition: 250ms;
+    height: 410px;
+    width: 410px;
+    box-shadow: 10px 10px 10px rgba(22, 20, 26, 0.1);
+}
+img:active {
+    opacity: 0.1;
+    transition: 50ms;
+}
+div:has(img:active) {
+    opacity: 0.0;
+    transition: 100ms step-start;
+}
+
+h1 {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    color: rgba(21, 23, 23, 0.323);
+}
+
+.text {
+ text-align: center;
+ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ font-size: 3.2rem;
+ background: linear-gradient(to right, rgb(94, 15, 252), rgb(141, 133, 229), rgb(0, 255, 255));
+ background-clip: text;
+ color: transparent;
+ font-weight: 400;
+}
